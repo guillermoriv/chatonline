@@ -1,23 +1,26 @@
+doctype html
 html
   head
-    title The chat for the BOIS
-    meta(name='description', content='Home page')
-    link#favicon(rel='icon', href='https://hyperdev.com/favicon-app.ico', type='image/x-icon')
+    title Xhatting
+    meta(name='description', content='Chat page')
+    link(rel='icon', href='https://image.flaticon.com/icons/svg/589/589723.svg', type='image/x-icon')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/public/style.css')
   body
-    h1.border.center The chat for the BOIS
-    h2.center Socket.IO Chat
-    .chat.center
+    main.main-chat
+      h1.title-xhatting Xhatting the next future chatting !
+      h2 Socket.IO Chat
       p#num-users
-      .chat-box
-        ul#messages
-        form(action='')
-          input#m(autocomplete='off')
-          button Send
-      a#logout(href='/logout') Logout  
-    script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
+      div.chat
+        div#clean-button-container
+          button#clean-chat Clear Chat
+        div.chat-box
+          ul#messages
+          form(action='')
+            input#m(autocomplete='off')
+            button.button-send Send
+      a(href='/logout', class="logout-link") Logout  
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js')
     script(src='/public/client.js')
