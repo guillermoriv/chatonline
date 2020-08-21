@@ -3,7 +3,6 @@ $( document ).ready(function() {
   var socket = io({transports: ['websocket']});
   // added {transports: ['websocket']} to work, idk why
   
-   
   // Form submittion with new message in field with id 'm'
   $('form').submit(function(){
     var messageToSend = $('#m').val();
@@ -13,6 +12,9 @@ $( document ).ready(function() {
     return false; // prevent form submit from refreshing page
   });
   
+  $('#clean-chat').click(() => {
+    $('ul').empty();
+  });
   
   socket.on('user', function(data){
     $('#num-users').text(data.currentUsers + ' users online');
@@ -26,6 +28,12 @@ $( document ).ready(function() {
   });
   
   socket.on('chat message', (data) => {
-     $('#messages').append($('<li>').html('<b>'+ data.name +'</b> ' + data.message));
+    if (data.message !== "") {
+      $('#messages').append($('<li>').html('<b>'+ data.name +'</b>: ' + data.message));
+      $("#messages").animate({scrollTop: $('#messages li:last').offset().top + 2000});
+      if ($("#messages li").length > 30) { // here i need to count the li elements INSIDE the #messages id
+        $('#messages li').first().remove();
+      } 
+    }
   });
 });

@@ -1,16 +1,34 @@
+doctype html
 html
   head
-    title The chat for the BOIS
+    title Xhatting
     meta(name='description', content='Home page')
-    link#favicon(rel='icon', href='https://hyperdev.com/favicon-app.ico', type='image/x-icon')
+    link(rel='icon', href='https://image.flaticon.com/icons/svg/589/589723.svg', type='image/x-icon')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/public/style.css')
+    script(src="https://kit.fontawesome.com/1141697e58.js" crossorigin="anonymous")
   body
-    h1.border.center The chat for the BOIS
-    h2.center Socket.IO Chat
-    .login.center
-      a(href='/auth/github') Login with Github!
-      a(href='/auth/facebook') Login with Facebook!
-    script(src='https://code.jquery.com/jquery-2.2.1.min.js', integrity='sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=', crossorigin='anonymous')
+    main#main-container
+      div#space-color-top
+      div
+        h1#title-xhatting Xhatting 
+      div.subtitle-container
+        p
+          | Welcome !, this is a page for chatting with other users, you can log in
+          | with 
+          strong Github 
+          | or 
+          strong Facebook
+      div#login-links-container
+        a(href='/auth/github').login-link
+          i(class="fab fa-github")
+          |
+          | Login with Github! 
+        a(href='/auth/facebook').login-link
+          i(class="fab fa-facebook-square")
+          |
+          | Login with Facebook!
+      div#space-color-bottom
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')

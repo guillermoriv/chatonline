@@ -27,7 +27,7 @@ module.exports = function (app, db) {
     passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "https://OccasionalEnviousMozbot--five-nine.repl.co/auth/facebook/callback"
+    callbackURL: "https://chat-online-for-thebois.glitch.me/auth/facebook/callback"
     },
       function(accessToken, refreshToken, profile, done) {
         //console.log(profile);
@@ -56,7 +56,7 @@ module.exports = function (app, db) {
     passport.use(new GitHubStrategy({
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: "https://OccasionalEnviousMozbot--five-nine.repl.co/auth/github/callback/"
+        callbackURL: "https://chat-online-for-thebois.glitch.me/auth/github/callback/"
       },
       function(accessToken, refreshToken, profile, done) {
           //console.log(profile);
