@@ -21,6 +21,7 @@ body {
   height: 80px;
   margin-bottom: auto;
   border-bottom: 4px solid rgba(0,0,0,0.15);
+  transition: all 0.5s ease;
 }
 
 #space-color-bottom {
@@ -28,12 +29,15 @@ body {
   height: 80px;
   border-top: 4px solid rgba(0,0,0,0.15);
   margin-top: auto;
+  transition: all 0.5s ease;
 }
 
 .subtitle-container {
   font-size: 20px;
   color: white;
-  margin: 10px 0;
+  margin: 10px auto;
+  width: 80%;
+  transition: all 0.5s ease;
 }
 
 #title-xhatting {
@@ -43,9 +47,10 @@ body {
 }
 
 .title-xhatting {
-  font-size: 60px;
+  font-size: 100px;
   text-shadow: 9px 8px 0px rgba(0,0,0,0.15);
   color: white;
+  transition: font-size 0.5s ease;
 }
 
 #login-links-container {
@@ -59,24 +64,29 @@ body {
   color: white;
   text-shadow: 2px 2px 1px #1f1f1f;
   transition: color 0.3s ease-out;
+  transition: all 0.5s ease;
 }
 
 .login-link:hover  {
   color: #6231be;
 }
 
-@media (max-width: 500px), (max-height: 400px) {
+@media (max-width: 700px), (max-height: 400px) {
   .login-link {
     padding: 5px;
     font-size: 20px;
   }
 
   #space-color-bottom {
-    height: 50px;
+    height: 100px;
   }
 
   #space-color-top {
-    height: 50px;
+    height: 100px;
+  }
+
+  .title-xhatting {
+    font-size: 80px;
   }
 }
 
@@ -89,20 +99,12 @@ body {
   padding: 10px;
   border-radius: 5px;
   color: white;
+  cursor: default;
+  transition: all 0.5s ease;
 }
-
 
 
 /* Styling the chat */
-.logout-link {
-  background-color: #6231be;
-  text-decoration: none;
-  color: white;
-  padding: 18px;
-  margin-right: 758px;
-  border-radius: 5px;
-  font-size: 18px;
-}
 
 .main-chat {
   height: 100vh;
@@ -116,6 +118,7 @@ body {
   background-color: #6231be;
   border-radius: 10px;
   flex-direction: column;
+  transition: ease all 0.5s;
 }
 
 .chat-box {
@@ -154,6 +157,13 @@ body {
   margin: 5px 0 0 0;
 }
 
+.title-chat {
+  font-size: 60px;
+  text-shadow: 9px 8px 0px rgba(0,0,0,0.15);
+  color: white;
+  transition: font-size 0.5s ease;
+}
+
 
 form {
   width: 100%;
@@ -179,6 +189,51 @@ form input {
   font-family: 'Alata';
   font-size: 15px;
   cursor: pointer;
+}
+
+.logout-link {
+  background-color: #6231be;
+  padding: 10px;
+  border-radius: 5px;
+  width: 15%;
+  text-decoration: none;
+  color: white;
+  margin: 60px auto;
+  font-size: 18px;
+}
+
+/* media query */
+@media (max-width: 800px), (max-height: 400px) {
+  .chat {
+    width: 400px;
+    height: 460px;
+  }
+
+  .chat-box {
+    margin: 10px 10px;
+  }
+
+  .title-chat {
+    font-size: 40px;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  form input {
+    width: 98%;
+  }
+
+  .button-send {
+    margin: 5px;
+  }
+
+  #num-users {
+    padding: 5px;
+    width: 90px;
+    font-size: 17px;
+  }
 }
 
 

@@ -9,7 +9,7 @@ html
     link(rel='stylesheet', href='/public/style.css')
   body
     main.main-chat
-      h1.title-xhatting Xhatting the next future chatting !
+      h1.title-chat Xhatting the next future chatting !
       h2 Socket.IO Chat
       p#num-users
       div.chat
@@ -18,9 +18,9 @@ html
         div.chat-box
           ul#messages
           form(action='')
-            input#m(autocomplete='off')
+            input#m(autocomplete='off', placeholder="Escribe un mensaje...")
             button.button-send Send
-      a(href='/logout', class="logout-link") Logout  
+        a(href='/logout', class="logout-link") Logout  
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js')
     script(src='/public/client.js')
