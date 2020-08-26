@@ -32,7 +32,7 @@ app.use(session({
 }));
 
 //here we connect to the database with mongo
-mongo.connect(process.env.DATABASE, (err, client) => {
+mongo.connect(process.env.DATABASE, { useUnifiedTopology: true }, (err, client) => {
   let db = client.db('advancednode');
   if(err) console.log('Database error: ' + err);
 
@@ -45,6 +45,8 @@ mongo.connect(process.env.DATABASE, (err, client) => {
   //start socket.io code  
   // variable to save the currentUsers
   var currentUsers = 0;
+  //connected users
+  var connectedUsers = [];
 
   //this is a middleware to deserialize the actual cookie
   io.use(passportSocketIo.authorize({
@@ -65,8 +67,25 @@ mongo.connect(process.env.DATABASE, (err, client) => {
     var back = ["#ff0000", "blue", "gray", "green", "orange", "yellow", "black", "red", "pink"];
     var rand = back[Math.floor(Math.random() * back.length)];
 
-    //io.emit('user count', currentUsers);
+
+    //when a user connects
+    connectedUsers.push(socket.request.user.name);
+
+    //emit the actual state of the user
     io.emit('user', { name: socket.request.user.name, currentUsers: currentUsers, connected: true, color: rand});
+    
+
+    //remember node.js code is asynchronous
+    //use socket.reques.user.name to see if the user is CONNECTED or no and then think for the connected === true?
+    db.collection('chatusers').find().toArray((err, docs) => {
+      //console.log(docs);
+      var users = docs.map(doc => {
+        return {name: doc.name, provider: doc.provider};
+      }); //this return an array of all the users in the database
+      //console.log(users);
+      //io.emit to emit all the users in the database
+      io.emit('users', {users: users, connectedUsers: connectedUsers});
+    });
 
     socket.on('chat message', (message) => {
       io.emit('chat message', {name: socket.request.user.name, message: message, color: rand});
@@ -76,6 +95,22 @@ mongo.connect(process.env.DATABASE, (err, client) => {
     socket.on('disconnect', () => {
       console.log('The ' + socket.request.user.name + ' has disconnected !');
       --currentUsers;
+
+      for (let i = 0; i < connectedUsers.length; i++) {
+        if (socket.request.user.name === connectedUsers[i]) {
+          connectedUsers.splice(i, 1);
+          db.collection('chatusers').find().toArray((err, docs) => {
+            //console.log(docs);
+            var users = docs.map(doc => {
+              return {name: doc.name, provider: doc.provider};
+            }); //this return an array of all the users in the database
+            //console.log(users);
+            //io.emit to emit all the users in the database
+            io.emit('users', {users: users, connectedUsers: connectedUsers});
+          });
+        }
+      }
+
       io.emit('user', { name: socket.request.user.name, currentUsers: currentUsers, connected: false});
     });
   });

@@ -90,20 +90,6 @@ body {
   }
 }
 
-/* Num of people in the chat */
-#num-users {
-  background-color: #6231be;
-  width: 120px;
-  margin: 10px auto;
-  font-size: 20px;
-  padding: 10px;
-  border-radius: 5px;
-  color: white;
-  cursor: default;
-  transition: all 0.5s ease;
-}
-
-
 /* Styling the chat */
 
 .main-chat {
@@ -113,13 +99,77 @@ body {
 .chat {
   display: flex;
   width: 850px;
-  height: 450px;
-  margin: auto;
+  height: 500px;
+  margin: auto auto auto 20px;
   background-color: #6231be;
   border-radius: 10px;
   flex-direction: column;
   transition: ease all 0.5s;
 }
+
+/* Num of people in the chat */
+
+#num-users {
+  width: 120px;
+  margin: 7px auto;
+  font-size: 16px;
+  padding: 10px;
+  color: white;
+  cursor: default;
+}
+
+/*Styling the wrapper */
+#general-wrapper {
+  display: flex;
+}
+
+/* Styling the list of users online */
+
+#title-users {
+  font-size: 20px;
+  color: white;
+}
+
+
+#all-users {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px 0 auto;
+  width: 300px;
+  background-color: #6231be;
+  border-radius: 10px;
+}
+
+#users-box {
+  margin: 10px 10px;
+}
+
+#users {
+  text-align: left;
+  margin: 0;
+  padding: 0 25px;
+  height: 25em;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: white;
+  border-radius: 6px;
+  list-style-type: square;
+}
+
+#users li {
+  padding: 15px 0;
+  font-size: 20px;
+}
+
+.showing {
+
+}
+
+.not-showing {
+  
+}
+
+/*Styling the chat box */
 
 .chat-box {
   width: 95%;

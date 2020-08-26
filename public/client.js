@@ -12,17 +12,26 @@ $( document ).ready(function() {
     return false; // prevent form submit from refreshing page
   });
   
+
   $('#clean-chat').click(() => {
-    $('ul').empty();
+    $('#messages').empty();
   });
 
-  $('#num-users').hover(
-    function() {
-      $(this).append($('<span>Over!</span>'));
-    }, function() {
-      $(this).find("span").last().remove();
-    }
-  );
+  //i receiving the data of an array and put it in the ul of #users
+  socket.on('users', data => {
+    var colors = ['#7FFF00', '#385898'];
+    //console.log(data.connectedUsers);
+    $('#users').empty();
+    data.users.map(user => {
+      var color = user.provider == "github" ? colors[0] : colors[1];
+      if (data.connectedUsers.indexOf(user.name) !== -1) {
+        return $('#users').append($('<li>').html('<b>' + user.name + '<\/b>: ' + '<b style="color: green;">connected<\/b> ' + 
+        '<b style="color: ' + color + ';">' + user.provider + '<\/b>'));
+      }else {
+        return $('#users').append($('<li>').html('<b>' + user.name + '<\/b>: ' + '<b style="color: red;">disconnected<\/b>'));
+      }
+    });
+  });
   
   socket.on('user', function(data){
     $('#num-users').text(data.currentUsers + ' users online');

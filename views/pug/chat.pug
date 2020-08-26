@@ -11,16 +11,21 @@ html
     main.main-chat
       h1.title-chat Xhatting the next future chatting !
       h2 Socket.IO Chat
-      p#num-users
-      div.chat
-        div#clean-button-container
-          button#clean-chat Clear Chat
-        div.chat-box
-          ul#messages
-          form(action='')
-            input#m(autocomplete='off', placeholder="Escribe un mensaje...")
-            button.button-send Send
-        a(href='/logout', class="logout-link") Logout  
+      div#general-wrapper
+        div#all-users
+          p#title-users Usuarios
+          div#users-box
+            ul#users
+        div.chat
+          p#num-users
+          div#clean-button-container
+            button#clean-chat Limpiar Chat
+          div.chat-box
+            ul#messages
+            form(action='')
+              input#m(autocomplete='off', placeholder="Escribe un mensaje...")
+              button.button-send Send
+          a(href='/logout', class="logout-link") Logout  
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js')
     script(src='/public/client.js')

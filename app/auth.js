@@ -15,8 +15,7 @@ module.exports = function (app, db) {
     });
 
     passport.deserializeUser((user, done) => {
-      var collection = user.provider === 'github' ? 'chatusers' : 'socialusers';
-      db.collection(collection).findOne(
+      db.collection('chatusers').findOne(
         {id: user.id},
         (err, doc) => {
           done(null, doc);
@@ -31,9 +30,8 @@ module.exports = function (app, db) {
     },
       function(accessToken, refreshToken, profile, done) {
         //console.log(profile);
-        db.collection('socialusers').findAndModify(
+        db.collection('chatusers').findOneAndUpdate(
           {id: profile.id},
-          {},
           {$setOnInsert: {
             id: profile.id,
             name: profile.displayName || 'No named',
@@ -44,7 +42,7 @@ module.exports = function (app, db) {
           }, $inc: {
             login_count: 1
           }},
-          {upsert: true, new: true}, //Inser object if not found, return new object
+          {upsert: true, returnNewDocument: true}, //Inser object if not found, return new object
           (err, doc) => {
             //console.log(doc.value);
             return done(null, doc.value);
@@ -60,9 +58,8 @@ module.exports = function (app, db) {
       },
       function(accessToken, refreshToken, profile, done) {
           //console.log(profile);
-          db.collection('chatusers').findAndModify(
+          db.collection('chatusers').findOneAndUpdate(
               {id: profile.id},
-              {},
               {$setOnInsert:{
                   id: profile.id,
                   name: profile.displayName || 'Anonymous',
@@ -76,7 +73,7 @@ module.exports = function (app, db) {
               },$inc:{
                   login_count: 1
               }},
-              {upsert:true, new: true}, //Insert object if not found, Return new object after modify
+              {upsert:true, returnNewDocument: true}, //Insert object if not found, Return new object after modify
               (err, doc) => {
                 //console.log(doc.value);
                 return done(null, doc.value);
